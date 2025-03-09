@@ -4,6 +4,26 @@
 
         <input type="hidden" name="role" value="Tata Usaha">
 
+
+        <!-- Id TU -->
+        <div>
+            <x-input-label for="id_tu" :value="__('Id Tata Usaha')" />
+            <x-text-input id="id_tu" class="block mt-1 w-full" type="text" name="id_tu" :value="old('id_tu')" required autofocus />
+            <x-input-error :messages="$errors->get('id_tu')" class="mt-2" />
+        </div>
+
+        <!-- Program Studi -->
+        <div class="mt-4">
+            <x-input-label for="program_studi" :value="__('Program Studi')" />
+            <select id="program_studi" name="program_studi" class="block mt-1 w-full border-gray-300 dark:border-gray-700 rounded-lg shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
+                <option value="" disabled selected>Pilih Program Studi</option>
+                <option value="Teknik Informatika">Teknik Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Magister Ilmu Komputer">Magister Ilmu Komputer</option>
+            </select>
+            <x-input-error :messages="$errors->get('program_studi')" class="mt-2" />
+        </div>
+
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
