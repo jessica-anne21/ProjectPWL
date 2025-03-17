@@ -12,7 +12,7 @@
         <p class="text-gray-600 mb-6 text-lg">Nikmati kemudahan akses dalam pengajuan surat. Silakan masuk atau daftar untuk melanjutkan.</p>
         <div class="flex justify-center space-x-4">
             <a href="{{ route('login') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-blue-700 transition">Login</a>
-            <a href="{{ route('register') }}" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-green-700 transition">Register</a>
+            <!-- <a href="{{ route('register') }}" class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-green-700 transition">Register</a> -->
         </div>
     </div>
 </body>

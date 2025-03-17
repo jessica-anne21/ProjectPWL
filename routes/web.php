@@ -3,8 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\Mahasiswa;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SuratController;
+
+use App\Http\Controllers\MahasiswaController;
+
+Route::get('/dashboard/mahasiswa', [MahasiswaController::class, 'dashboard'])->name('dashboard.mahasiswa');
+
+
+Route::post('/surat', [SuratController::class, 'store'])->name('surat.store');
+
 
 Route::get('/login', function () {
     return view('select-role'); // Menampilkan halaman pemilihan peran

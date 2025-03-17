@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\ProgramStudi;
 
 class RegisteredUserController extends Controller
 {
@@ -21,6 +22,15 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
+
+    
+
+    // public function create()
+    // {
+    //     $programStudis = ProgramStudi::all();
+    //     return view('auth.register', compact('programStudis'));
+    // }
+
 
     /**
      * Handle an incoming registration request.
@@ -42,7 +52,6 @@ class RegisteredUserController extends Controller
         'id_tu' => 'nullable|string|unique:tata_usaha,id_tu'
     ]);
 
-    // Simpan data ke users
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -50,15 +59,16 @@ class RegisteredUserController extends Controller
         'role' => $request->role
     ]);
 
-    // Simpan data sesuai role
     if ($request->role === 'Mahasiswa') {
         Mahasiswa::create([
-            'user_id' => $user->id,
             'nrp' => $request->nrp,
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
             'program_studi_id' => $request->program_studi_id
         ]);
         return redirect()->route('dashboard.mahasiswa');
+    
     } elseif ($request->role === 'Ketua Prodi') {
         Kaprodi::create([
             'user_id' => $user->id,

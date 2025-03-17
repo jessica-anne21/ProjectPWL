@@ -21,7 +21,7 @@
                 <option value="Magister Ilmu Komputer">Magister Ilmu Komputer</option>
             </select>
             <x-input-error :messages="$errors->get('program_studi')" class="mt-2" />
-        </div>
+        </div> 
 
         <!-- Name -->
         <div class="mt-4">
