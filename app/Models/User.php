@@ -10,15 +10,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users'; // User model seharusnya terhubung ke tabel users
+    protected $table = 'users'; 
 
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
-        'program_studi_id', // Pastikan ini ada di tabel users
+        'program_studi_id', 
     ];
+
+    protected $primaryKey = 'id';
 
     protected $hidden = [
         'password',

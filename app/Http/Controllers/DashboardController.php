@@ -18,6 +18,8 @@ class DashboardController extends Controller
             return redirect()->route('dashboard.ketua_prodi');
         } elseif ($user->role === 'Tata Usaha') {
             return redirect()->route('dashboard.tata_usaha');
+        } elseif ($user->role === 'Admin') {
+            return redirect()->route('dashboard.admin');
         }
 
         return abort(403, 'Unauthorized');
@@ -36,5 +38,10 @@ class DashboardController extends Controller
     public function tataUsaha()
     {
         return view('dashboard.tata_usaha');
+    }
+
+    public function admin()
+    {
+        return view('dashboard.admin');
     }
 }

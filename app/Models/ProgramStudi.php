@@ -7,7 +7,7 @@ class ProgramStudi extends Model
 {
     use HasFactory;
 
-    protected $table = 'program_studis'; // Sesuai dengan tabel di database
+    protected $table = 'program_studi'; // Sesuai dengan tabel di database
     protected $fillable = ['name', 'email', 'password', 'role', 'program_studi_id'];
 
 

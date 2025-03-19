@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -46,10 +47,11 @@ class RegisteredUserController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8|confirmed',
-        'role' => 'required|in:Mahasiswa,Ketua Prodi,Tata Usaha',
+        'role' => 'required|in:Mahasiswa,Ketua Prodi,Tata Usaha,Admin',
         'nrp' => 'nullable|string|unique:mahasiswa,nrp',
         'id_kaprodi' => 'nullable|string|unique:kaprodi,id_kaprodi',
-        'id_tu' => 'nullable|string|unique:tata_usaha,id_tu'
+        'id_tu' => 'nullable|string|unique:tata_usaha,id_tu',
+        'id_admin' => 'nullable|string|unique:admin,id_admin'
     ]);
 
     $user = User::create([
@@ -84,6 +86,14 @@ class RegisteredUserController extends Controller
         ]);
         return redirect()->route('dashboard.tata_usaha');
     }
+    elseif ($request->role === 'Admin') {
+        Admin::create([
+            'user_id' => $user->id,
+            'id_admin' => $request->id_admin,
+            'name' => $request->name
+        ]);
+        return redirect()->route('dashboard.admin');
+    }
 
     return redirect('/');
 }
@@ -102,6 +112,11 @@ class RegisteredUserController extends Controller
     public function showTURegister()
     {
         return view('auth.register-tu');
+    }
+
+    public function showAdminRegister()
+    {
+        return view('auth.register-admin');
     }
 
 

@@ -1,0 +1,1 @@
+SELECT * FROM pw220242.dosen;

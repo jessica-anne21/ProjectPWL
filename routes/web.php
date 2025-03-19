@@ -29,6 +29,8 @@ Route::post('/login-redirect', function (Request $request) {
         return redirect()->route('login.kaprodi');
     } elseif ($role === 'tata_usaha') {
         return redirect()->route('login.tata_usaha');
+    } elseif ($role === 'admin') {
+        return redirect()->route('login.admin');
     }
 
     return back()->withErrors(['role' => 'Peran tidak valid.']);
@@ -46,6 +48,10 @@ Route::get('/login-tata-usaha', function () {
     return view('auth.login-tata-usaha');
 })->name('login.tata_usaha');
 
+Route::get('/login-admin', function () {
+    return view('auth.login-admin');
+})->name('login.admin');
+
 
 Route::get('/register', function () {
     return view('auth.register');
@@ -54,6 +60,7 @@ Route::get('/register', function () {
 Route::get('/register/mahasiswa', [RegisteredUserController::class, 'showMahasiswaRegister'])->name('register.mahasiswa');
 Route::get('/register/kaprodi', [RegisteredUserController::class, 'showKaprodiRegister'])->name('register.kaprodi');
 Route::get('/register/tu', [RegisteredUserController::class, 'showTURegister'])->name('register.tu');
+Route::get('/register/admin', [RegisteredUserController::class, 'showAdminRegister'])->name('register.admin');
 
 
 
@@ -65,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/mahasiswa', [DashboardController::class, 'mahasiswa'])->name('dashboard.mahasiswa');
     Route::get('/dashboard/ketua-prodi', [DashboardController::class, 'ketuaProdi'])->name('dashboard.ketua_prodi');
     Route::get('/dashboard/tata-usaha', [DashboardController::class, 'tataUsaha'])->name('dashboard.tata_usaha');
+    Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
 });
 
 
