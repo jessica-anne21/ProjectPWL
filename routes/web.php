@@ -10,6 +10,17 @@ use App\Http\Controllers\SuratController;
 
 use App\Http\Controllers\MahasiswaController;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
+
+
 Route::get('/dashboard/mahasiswa', [MahasiswaController::class, 'dashboard'])->name('dashboard.mahasiswa');
 
 
