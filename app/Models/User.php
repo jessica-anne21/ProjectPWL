@@ -16,8 +16,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
-        'program_studi_id', 
+        'role_id',
     ];
 
     protected $primaryKey = 'id';
@@ -41,13 +40,18 @@ class User extends Authenticatable
         return $this->hasOne(Kaprodi::class, 'user_id');
     }
 
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'user_id');
+    }
+
     public function tataUsaha()
     {
         return $this->hasOne(TataUsaha::class, 'user_id');
     }
 
     public function programStudi()
-    {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
-    }
+{
+    return $this->belongsTo(ProgramStudi::class, 'program_studi_id', 'id');
+}
 }

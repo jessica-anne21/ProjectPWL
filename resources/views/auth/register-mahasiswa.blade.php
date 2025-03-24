@@ -2,7 +2,8 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <input type="hidden" name="role" value="Mahasiswa">
+        <!-- Role ID untuk Mahasiswa -->
+        <input type="hidden" name="role_id" value="2">
 
         <!-- NRP -->
         <div>
@@ -13,14 +14,14 @@
 
         <!-- Program Studi -->
         <div class="mt-4">
-            <x-input-label for="program_studi" :value="__('Program Studi')" />
-            <select id="program_studi" name="program_studi" class="block mt-1 w-full border-gray-300 dark:border-gray-700 rounded-lg shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
-                <option value="" disabled selected>Pilih Program Studi</option>
-                <option value="Teknik Informatika">Teknik Informatika</option>
-                <option value="Sistem Informasi">Sistem Informasi</option>
-                <option value="Magister Ilmu Komputer">Magister Ilmu Komputer</option>
+            <x-input-label for="program_studi_id" :value="__('Program Studi')" />
+            <select id="program_studi_id" name="program_studi_id" class="block mt-1 w-full border-gray-300 dark:border-gray-700 rounded-lg shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" required>
+                <option value="" disabled {{ old('program_studi_id') == '' ? 'selected' : '' }}>Pilih Program Studi</option>
+                <option value="1" {{ old('program_studi_id') == '1' ? 'selected' : '' }}>Teknik Informatika</option>
+                <option value="2" {{ old('program_studi_id') == '2' ? 'selected' : '' }}>Sistem Informasi</option>
+                <option value="3" {{ old('program_studi_id') == '3' ? 'selected' : '' }}>Magister Ilmu Komputer</option>
             </select>
-            <x-input-error :messages="$errors->get('program_studi')" class="mt-2" />
+            <x-input-error :messages="$errors->get('program_studi_id')" class="mt-2" />
         </div> 
 
         <!-- Name -->

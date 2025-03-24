@@ -12,15 +12,16 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         // Redirect sesuai peran
-        if ($user->role === 'Mahasiswa') {
-            return redirect()->route('dashboard.mahasiswa');
-        } elseif ($user->role === 'Ketua Prodi') {
-            return redirect()->route('dashboard.ketua_prodi');
-        } elseif ($user->role === 'Tata Usaha') {
-            return redirect()->route('dashboard.tata_usaha');
-        } elseif ($user->role === 'Admin') {
+        if ($user->role_id == 1) {
             return redirect()->route('dashboard.admin');
+        } elseif ($user->role_id == 2) {
+            return redirect()->route('dashboard.mahasiswa');
+        } elseif ($user->role_id == 3) {
+            return redirect()->route('dashboard.ketua_prodi');
+        } elseif ($user->role_id == 4) {
+            return redirect()->route('dashboard.tata_usaha');
         }
+        
 
         return abort(403, 'Unauthorized');
     }

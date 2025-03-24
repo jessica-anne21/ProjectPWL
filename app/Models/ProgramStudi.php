@@ -7,12 +7,13 @@ class ProgramStudi extends Model
 {
     use HasFactory;
 
-    protected $table = 'program_studi'; // Sesuai dengan tabel di database
-    protected $fillable = ['name', 'email', 'password', 'role', 'program_studi_id'];
+    protected $table = 'prodi'; // Pastikan nama tabel benar
+    protected $primaryKey = 'id'; // Sesuaikan primary key (opsional, default sudah 'id')
 
+    protected $fillable = ['nama_prodi']; // Sesuaikan dengan kolom di database
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'program_studi_id'); 
     }
 }
