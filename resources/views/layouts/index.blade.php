@@ -45,8 +45,10 @@
           @include('layouts.sidebar-admin')
         @elseif(Auth::user()->role_id == 2)
           @include('layouts.sidebar-mahasiswa')
-        @else
-          @include('layouts.sidebar-default')
+        @elseif(Auth::user()->role_id == 3)
+          @include('layouts.sidebar-kaprodi')
+        @elseif(Auth::user()->role_id == 4)
+          @include('layouts.sidebar_tu')
         @endif
       @endif
 

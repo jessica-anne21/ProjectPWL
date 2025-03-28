@@ -24,6 +24,6 @@ class Mahasiswa extends Model
     // Relasi ke Program Studi
     public function prodi()
     {
-        return $this->belongsTo(Prodi::class, 'program_studi_id', 'id');
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id', 'id');
     }
 }

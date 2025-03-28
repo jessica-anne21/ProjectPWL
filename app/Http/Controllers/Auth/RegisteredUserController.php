@@ -69,7 +69,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'program_studi_id' => $request->program_studi_id
         ]);
-        return redirect()->route('dashboard.mahasiswa');
+        return redirect()->route('mahasiswa.dashboard');
     } elseif ($request->role_id == 3) { 
         Kaprodi::create([
             'user_id' => $user->id,
@@ -77,7 +77,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'program_studi_id' => $request->program_studi_id, 
         ]);
-        return redirect()->route('dashboard.ketua_prodi');
+        return redirect()->route('kaprodi.dashboard');
     } elseif ($request->role_id == 4) { 
         TataUsaha::create([
             'user_id' => $user->id,
@@ -85,7 +85,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'program_studi_id' => $request->program_studi_id, 
         ]);
-        return redirect()->route('dashboard.tata_usaha');
+        return redirect()->route('tata_usaha.dashboard');
     }
 
     return redirect('/');

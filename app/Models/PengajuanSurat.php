@@ -9,5 +9,19 @@ class PengajuanSurat extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengajuan_surat'; // Sesuaikan dengan nama tabel di database
+    protected $table = 'pengajuan_surat';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'nrp', 'jenis_surat', 'deskripsi', 'status', 'file_surat'
+    ];
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'nrp', 'nrp');
+    }
+
+    
+
 }

@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead class="table-light">
                             <tr>
                                 <th>No</th>
                                 <th>Jenis Surat</th>
@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($riwayat_surat as $index => $surat)
+                            @forelse ($riwayat_surat as $surat)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $surat->jenis_surat ?? '-' }}</td>
@@ -34,18 +34,18 @@
                                     <td>
                                         @php
                                             $status = strtolower($surat->status ?? 'unknown');
+                                            $status_classes = [
+                                                'menunggu persetujuan' => 'bg-warning',
+                                                'disetujui' => 'bg-success',
+                                                'ditolak' => 'bg-danger',
+                                                'default' => 'bg-secondary'
+                                            ];
                                         @endphp
-                                        @if($status == 'diajukan')
-                                            <span class="badge bg-warning">Diajukan</span>
-                                        @elseif($status == 'disetujui')
-                                            <span class="badge bg-success">Disetujui</span>
-                                        @elseif($status == 'ditolak')
-                                            <span class="badge bg-danger">Ditolak</span>
-                                        @else
-                                            <span class="badge bg-secondary">Status Tidak Diketahui</span>
-                                        @endif
+                                        <span class="badge {{ $status_classes[$status] ?? $status_classes['default'] }}">
+                                            {{ ucwords($status) }}
+                                        </span>
                                     </td>
-                                    <td>{{ $surat->created_at ? \Carbon\Carbon::parse($surat->created_at)->format('d M Y') : '-' }}</td>
+                                    <td>{{ $surat->created_at ? \Carbon\Carbon::parse($surat->created_at)->translatedFormat('d M Y') : '-' }}</td>
                                     <td>
                                         @if (!empty($surat->file_surat))
                                             <a href="{{ asset('uploads/surat/' . $surat->file_surat) }}" target="_blank" class="btn btn-primary btn-sm">

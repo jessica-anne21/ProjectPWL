@@ -3,13 +3,13 @@
         <div class="sidebar-content">
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.mahasiswa') }}">
+                    <a href="{{ route('mahasiswa.dashboard') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard Mahasiswa</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                <a href="{{ route('mahasiswa.surat') }}">
                         <i class="fas fa-file-upload"></i>
                         <p>Ajukan Surat</p>
                     </a>

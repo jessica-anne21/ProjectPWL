@@ -17,12 +17,14 @@ class Kaprodi extends Model
     // Relasi ke User
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id_kaprodi');
     }
 
-    // Relasi ke Program Studi
-    public function prodi()
+   
+
+    public function programStudi()
     {
-        return $this->belongsTo(Prodi::class, 'program_studi_id', 'id');
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
     }
+
 }

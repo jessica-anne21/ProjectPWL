@@ -3,15 +3,15 @@
         <div class="sidebar-content">
             <ul class="nav nav-primary">
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="{{ route('kaprodi.dashboard') }}">
                         <i class="fas fa-home"></i>
-                        <p>Dashboard Admin</p>
+                        <p>Dashboard Ketua Prodi</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                <a href="{{ route('admin.users.index') }}">
+                <a href="#">
                 <i class="fas fa-users"></i>
-                        <p>Manajemen Pengguna</p>
+                        <p>Manajemen Surat</p>
                     </a>
                 </li>
             </ul>
