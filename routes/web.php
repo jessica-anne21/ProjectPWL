@@ -9,16 +9,32 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SuratController;
 
 use App\Http\Controllers\MahasiswaController;
-
-// use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
-Route::post('/logout', function () {
+
+Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+Route::get('admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+    Route::post('admin/users', [AdminController::class, 'store'])->name('admin.users.store');
+
+
+// Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+//     Route::get('/users', [AdminController::class, 'index'])->name('admin.users.index');
+//     Route::get('/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+//     Route::post('/users', [AdminController::class, 'store'])->name('admin.users.store');
+// });
+
+
+
+
+Route::middleware('auth')->post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
     return redirect('/');
 })->name('logout');
+
 
 
 Route::get('/dashboard/mahasiswa', [MahasiswaController::class, 'dashboard'])->name('dashboard.mahasiswa');
@@ -83,7 +99,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/mahasiswa', [DashboardController::class, 'mahasiswa'])->name('dashboard.mahasiswa');
     Route::get('/dashboard/ketua-prodi', [DashboardController::class, 'ketuaProdi'])->name('dashboard.ketua_prodi');
     Route::get('/dashboard/tata-usaha', [DashboardController::class, 'tataUsaha'])->name('dashboard.tata_usaha');
-    Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
+    Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('admin.dashboard');
 });
 
 

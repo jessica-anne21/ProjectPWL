@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PengajuanSurat;
+use App\Models\User;
+
 
 class DashboardController extends Controller
 {
@@ -13,7 +16,7 @@ class DashboardController extends Controller
 
         // Redirect sesuai peran
         if ($user->role_id == 1) {
-            return redirect()->route('dashboard.admin');
+            return redirect()->route('admin.dashboard');
         } elseif ($user->role_id == 2) {
             return redirect()->route('dashboard.mahasiswa');
         } elseif ($user->role_id == 3) {
@@ -28,7 +31,14 @@ class DashboardController extends Controller
 
     public function mahasiswa()
     {
-        return view('dashboard.mahasiswa');
+        $user = Auth::user();
+
+    // Ambil riwayat surat berdasarkan NRP mahasiswa
+    $riwayat_surat = \App\Models\PengajuanSurat::where('nrp', $user->mahasiswa->nrp)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('dashboard.mahasiswa', compact('riwayat_surat'));
     }
 
     public function ketuaProdi()
@@ -43,6 +53,8 @@ class DashboardController extends Controller
 
     public function admin()
     {
-        return view('dashboard.admin');
+        $total_users = User::count(); // Menghitung jumlah user di database
+
+    return view('admin.dashboard', compact('total_users'));
     }
 }

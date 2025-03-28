@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'program_studi_id' => $request->program_studi_id, 
         ]);
-        return redirect()->route('dashboard.admin');
+        return redirect()->route('admin.dashboard');
     } elseif ($request->role_id == 2) { 
         Mahasiswa::create([
             'user_id' => $user->id,

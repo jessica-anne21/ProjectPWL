@@ -50,8 +50,5 @@ class User extends Authenticatable
         return $this->hasOne(TataUsaha::class, 'user_id');
     }
 
-    public function programStudi()
-{
-    return $this->belongsTo(ProgramStudi::class, 'program_studi_id', 'id');
-}
+    
 }

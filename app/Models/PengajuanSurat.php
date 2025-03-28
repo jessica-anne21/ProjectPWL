@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,5 +9,5 @@ class PengajuanSurat extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengajuan_surat'; // Sesuaikan dengan nama tabel
+    protected $table = 'pengajuan_surat'; // Sesuaikan dengan nama tabel di database
 }

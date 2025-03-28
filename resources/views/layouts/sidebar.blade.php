@@ -3,14 +3,14 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="#" class="logo">
+            <!-- <a href="#" class="logo">
               <img
                 src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
               />
-            </a>
+            </a> -->
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
                 <i class="gg-menu-right"></i>
@@ -40,13 +40,6 @@
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="dashboard">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="../demo1/index.html">
-                        <span class="sub-item">Dashboard 1</span>
-                      </a>
-                    </li>
-                  </ul>
                 </div>
               </li>
               <li class="nav-section">
