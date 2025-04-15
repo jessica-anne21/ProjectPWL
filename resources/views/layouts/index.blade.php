@@ -53,7 +53,17 @@
       @endif
 
       <div class="main-panel">
-        @include('layouts.headnav')
+      @if(Auth::check())
+        @if(Auth::user()->role_id == 1)
+          @include('layouts.headnav-admin')
+        @elseif(Auth::user()->role_id == 2)
+          @include('layouts.headnav-mahasiswa')
+        @elseif(Auth::user()->role_id == 3)
+          @include('layouts.headnav-kaprodi')
+        @elseif(Auth::user()->role_id == 4)
+          @include('layouts.headnav_tu')
+        @endif
+      @endif
 
         @yield('content')
         @include('layouts.footer')

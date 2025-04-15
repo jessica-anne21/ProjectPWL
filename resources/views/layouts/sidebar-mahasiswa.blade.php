@@ -14,12 +14,12 @@
                         <p>Ajukan Surat</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#">
                         <i class="fas fa-folder-open"></i>
                         <p>Surat Saya</p>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

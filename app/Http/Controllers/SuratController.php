@@ -29,7 +29,7 @@ class SuratController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'jenis_surat' => 'required|in:Surat Keterangan Aktif,Surat Cuti,Surat Mata Kuliah',
+        'jenis_surat' => 'required|in:Surat Keterangan Mahasiswa Aktif, Surat Pengantar Tugas Mata Kuliah,Surat Keterangan Lulus, Laporan Hasil Studi',
         'deskripsi' => 'required|string',
     ]);
 
@@ -166,4 +166,65 @@ public function detail($id)
         $filePath = public_path('uploads/surat/' . $pengajuan->file_surat);
         return response()->download($filePath);
     }
+
+    public function edit($id)
+{
+    \Log::info("Editing surat with ID: $id");
+
+    $surat = PengajuanSurat::where('id', $id)
+        ->where('nrp', Auth::user()->nrp)
+        ->firstOrFail();
+
+    return view('mahasiswa.edit-surat', compact('surat'));
+}
+
+    
+
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'jenis_surat' => 'required|string|max:255',
+        'deskripsi' => 'nullable|string|max:1000',
+    ]);
+
+    // Ambil data pengajuan surat berdasarkan id dan nrp mahasiswa yang sedang login
+    $surat = PengajuanSurat::where('id', $id)
+        ->where('nrp', Auth::user()->nrp) // Sesuaikan dengan 'nrp'
+        ->firstOrFail();
+
+    // Cek status surat
+    if ($surat->status !== 'Menunggu Persetujuan') {
+        return redirect()->back()->with('error', 'Surat tidak dapat diedit karena sudah diproses.');
+    }
+
+    // Update surat dengan data baru
+    $surat->update([
+        'jenis_surat' => $request->jenis_surat,
+        'deskripsi' => $request->deskripsi,
+    ]);
+
+    // Redirect ke halaman dashboard mahasiswa
+    return redirect()->route('mahasiswa.dashboard')->with('success', 'Pengajuan surat berhasil diperbarui.');
+}
+
+
+
+public function destroy($id)
+{
+    // Mengambil data pengajuan surat berdasarkan id dan nrp mahasiswa yang sedang login
+    $surat = PengajuanSurat::where('id', $id)
+        ->where('nrp', Auth::user()->nrp) // Memastikan hanya mahasiswa yang bersangkutan yang bisa menghapus
+        ->firstOrFail();
+
+    // Cek apakah status surat sudah diproses, jika ya tidak bisa dihapus
+    if ($surat->status !== 'Menunggu Persetujuan') {
+        return redirect()->back()->with('error', 'Surat tidak dapat dihapus karena sudah diproses.');
+    }
+
+    // Hapus surat
+    $surat->delete();
+
+    return redirect()->route('mahasiswa.surat')->with('success', 'Pengajuan surat berhasil dihapus.');
+}
 }

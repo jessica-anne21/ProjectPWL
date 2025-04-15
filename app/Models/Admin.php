@@ -9,20 +9,17 @@ class Admin extends Model
 {
     use HasFactory;
 
-    protected $table = 'admin'; // Ubah ke 'admins' jika tabel mengikuti konvensi Laravel
-    protected $fillable = ['id_admin', 'user_id', 'program_studi_id', 'created_at', 'updated_at'];
+    protected $table = 'admin'; // Tetap atau 'admins' jika pakai konvensi Laravel
+
+    protected $fillable = [
+        'user_id', // Tetap perlu untuk relasi login
+    ];
 
     public $timestamps = true;
 
-    // Relasi ke User
+    // Relasi ke User (admin login via user)
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    // Relasi ke Program Studi
-    public function prodi()
-    {
-        return $this->belongsTo(Prodi::class, 'program_studi_id', 'id');
     }
 }

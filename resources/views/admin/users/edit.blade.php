@@ -29,13 +29,13 @@
                     </div>
 
                     <div class="mb-3" id="kaprodi_id_field" style="display: none;">
-                        <label for="kaprodi_id" class="form-label">ID Kaprodi</label>
-                        <input type="text" name="kaprodi_id" class="form-control" value="{{ $user->kaprodi->id ?? '' }}">
+                        <label for="id_kaprodi" class="form-label">ID Kaprodi</label>
+                        <input type="text" name="id_kaprodi" class="form-control" value="{{ $user->kaprodi->id_kaprodi ?? '' }}">
                     </div>
 
                     <div class="mb-3" id="tu_id_field" style="display: none;">
-                        <label for="tu_id" class="form-label">ID Tata Usaha</label>
-                        <input type="text" name="tu_id" class="form-control" value="{{ $user->tataUsaha->id ?? '' }}">
+                        <label for="id_tata_usaha" class="form-label">ID Tata Usaha</label>
+                        <input type="text" name="id_tata_usaha" class="form-control" value="{{ $user->tataUsaha->id_tata_usaha ?? '' }}">
                     </div>
 
                     <div class="mb-3">
@@ -47,8 +47,6 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
                     </div>
-
-                    
 
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
@@ -67,14 +65,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function toggleFields() {
         let role = roleSelect.value;
+        
+        // Toggle visibility based on role
         nrpField.style.display = (role == "2") ? "block" : "none";
         kaprodiField.style.display = (role == "3") ? "block" : "none";
         tuField.style.display = (role == "4") ? "block" : "none";
     }
 
     roleSelect.addEventListener("change", toggleFields);
-    toggleFields(); // Panggil saat halaman pertama kali dimuat
+    toggleFields(); // Initialize on page load
 });
 </script>
-
 @endsection

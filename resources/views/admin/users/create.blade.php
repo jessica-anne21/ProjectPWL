@@ -36,6 +36,18 @@
                         <label for="id_tata_usaha" class="form-label">ID Tata Usaha</label>
                         <input type="text" name="id_tata_usaha" id="id_tata_usaha" class="form-control">
                     </div>
+
+                    <div class="mb-3" id="prodiField" style="display: none;">
+                        <label for="program_studi_id" class="form-label">Program Studi</label>
+                        <select name="program_studi_id" id="program_studi_id" class="form-control">
+                            <option value="">-- Pilih Program Studi --</option>
+                            @foreach ($prodi as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
                     
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
@@ -68,10 +80,18 @@
 <script>
     function toggleFields() {
         let role = document.getElementById('role_id').value;
+
         document.getElementById('nrpField').style.display = (role == 2) ? 'block' : 'none';
         document.getElementById('idProdiField').style.display = (role == 3) ? 'block' : 'none';
         document.getElementById('idTUField').style.display = (role == 4) ? 'block' : 'none';
+        document.getElementById('prodiField').style.display = (role == 2 || role == 3 || role == 4) ? 'block' : 'none';
     }
+
+    // Panggil saat pertama kali halaman diload
+    document.addEventListener('DOMContentLoaded', function () {
+        toggleFields();
+    });
 </script>
+
 
 @endsection

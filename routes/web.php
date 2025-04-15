@@ -125,10 +125,17 @@ Route::middleware('auth')->group(function () {
 });
 
 
+use App\Http\Controllers\NotificationController;
 
+
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 
 Route::get('/mahasiswa/surat', [SuratController::class, 'index'])->name('mahasiswa.surat');
 Route::post('/mahasiswa/surat', [SuratController::class, 'store'])->name('mahasiswa.surat.store');
+Route::get('/mahasiswa/surat/{id}/edit', [SuratController::class, 'edit'])->name('mahasiswa.surat.edit');
+Route::put('/mahasiswa/surat/{id}', [SuratController::class, 'update'])->name('mahasiswa.surat.update');
+Route::delete('/mahasiswa/surat/{id}', [SuratController::class, 'destroy'])->name('mahasiswa.surat.destroy');
 
 
 Route::get('/kaprodi/surat', [SuratController::class, 'listByStatus'])->name('kaprodi.surat');

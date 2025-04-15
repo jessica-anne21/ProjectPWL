@@ -4,25 +4,6 @@
 
         <input type="hidden" name="role_id" value="1">
 
-        <!-- Id Admin -->
-        <div>
-            <x-input-label for="id_admin" :value="__('Id Admin')" />
-            <x-text-input id="id_admin" class="block mt-1 w-full" type="text" name="id_admin" :value="old('id_admin')" required autofocus />
-            <x-input-error :messages="$errors->get('id_admin')" class="mt-2" />
-        </div>
-
-        <!-- Program Studi -->
-        <div class="mt-4">
-            <x-input-label for="program_studi_id" :value="__('Program Studi')" />
-            <select id="program_studi_id" name="program_studi_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
-                <option value="" disabled {{ old('program_studi_id') == '' ? 'selected' : '' }}>Pilih Program Studi</option>
-                <option value="1" {{ old('program_studi_id') == '1' ? 'selected' : '' }}>Teknik Informatika</option>
-                <option value="2" {{ old('program_studi_id') == '2' ? 'selected' : '' }}>Sistem Informasi</option>
-                <option value="3" {{ old('program_studi_id') == '3' ? 'selected' : '' }}>Magister Ilmu Komputer</option>
-            </select>
-            <x-input-error :messages="$errors->get('program_studi_id')" class="mt-2" />
-        </div>
-
         <!-- Name -->
         <div class="mt-4">
             <x-input-label for="name" :value="__('Name')" />

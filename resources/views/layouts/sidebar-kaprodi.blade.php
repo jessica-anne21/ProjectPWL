@@ -8,12 +8,6 @@
                         <p>Dashboard Ketua Prodi</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                <a href="#">
-                <i class="fas fa-users"></i>
-                        <p>Manajemen Surat</p>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
