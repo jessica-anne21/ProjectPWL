@@ -1,7 +1,7 @@
 Portal Pengajuan Surat
 
 1. Pertama, download zip program ini.
-2. Import database dengan nama 'portal_pengajuan_surat.sql' ke dalam device masing-masing.
+2. Import file database dengan nama 'portal_pengajuan_surat.sql' dari folder 'database' ke dalam device masing-masing.
 3. Jalankan program Laravel dengan php artisan serve.
 
 Penjelasan role : 
