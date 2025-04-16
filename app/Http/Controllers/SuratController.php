@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PengajuanSurat;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification; // di bagian atas file
+
 
 class SuratController extends Controller
 {
@@ -52,6 +54,16 @@ public function store(Request $request)
         'updated_at' => now(),
     ]);
 
+    Notification::create([
+        'role' => 'kaprodi',
+        'nrp' => $mahasiswa->nrp,
+        'message' => 'Pengajuan surat baru oleh ' . $mahasiswa->user->name,
+        'is_read' => false,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+
     return redirect()->route('mahasiswa.surat')->with('success', 'Pengajuan surat berhasil dikirim.');
 }
 
@@ -69,6 +81,18 @@ public function store(Request $request)
     $pengajuan = PengajuanSurat::findOrFail($id);
     $pengajuan->status = $request->status;
     $pengajuan->save();
+
+    if ($request->status == 'Disetujui') {
+        Notification::create([
+            'role' => 'tu',
+            'nrp' => $pengajuan->nrp,
+            'message' => 'Surat telah disetujui oleh Kaprodi. Harap unggah suratnya.',
+            'is_read' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+    
 
     return redirect()->back()->with('success', 'Status pengajuan diperbarui!');
 }
@@ -121,6 +145,15 @@ public function show($id)
 
         $pengajuan->file_surat = $fileName;
         $pengajuan->save();
+        Notification::create([
+            'role' => 'mahasiswa',
+            'nrp' => $pengajuan->nrp,
+            'message' => 'Surat Anda telah tersedia dan bisa diunduh.',
+            'is_read' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
 
         return redirect()->back()->with('success', 'Surat berhasil diunggah!');
     }

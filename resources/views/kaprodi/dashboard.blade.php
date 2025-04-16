@@ -4,7 +4,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Dashboard Ketua Program Studi</h3>
+            <h3 class="fw-bold mb-3">Dashboard Ketua Program Studi {{ $programStudi->nama_prodi }} </h3>
         </div>
 
         <!-- Statistik Pengajuan Surat -->

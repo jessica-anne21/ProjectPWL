@@ -51,9 +51,12 @@ class DashboardController extends Controller
         dd("ERROR: Data Ketua Prodi tidak ditemukan!", Auth::user());
     }
 
-    // Debugging untuk cek apakah program_studi_id null
-    if (is_null($kaprodi->program_studi_id)) {
-        dd("ERROR: program_studi_id Ketua Prodi NULL!", $kaprodi);
+    // Ambil nama program studi berdasarkan program_studi_id
+    $programStudi = $kaprodi->programStudi;  // Mengambil data Program Studi terkait
+
+    // Debugging untuk cek apakah programStudi null
+    if (!$programStudi) {
+        dd("ERROR: Program Studi tidak ditemukan untuk Ketua Prodi!", $kaprodi);
     }
 
     // Ambil jumlah surat berdasarkan program studi dari mahasiswa
@@ -69,10 +72,9 @@ class DashboardController extends Controller
         $query->where('program_studi_id', $kaprodi->program_studi_id);
     })->where('status', 'Ditolak')->count();
 
-    
-
-    return view('kaprodi.dashboard', compact('jumlah_menunggu', 'jumlah_disetujui', 'jumlah_ditolak'));
+    return view('kaprodi.dashboard', compact('jumlah_menunggu', 'jumlah_disetujui', 'jumlah_ditolak', 'programStudi'));
 }
+
 
 
     public function tataUsaha()

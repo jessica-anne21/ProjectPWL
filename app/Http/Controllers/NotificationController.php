@@ -9,24 +9,55 @@ use Illuminate\Support\Facades\Auth;
 class NotificationController extends Controller
 {
     public function index()
-    {
-        // Ambil notifikasi mahasiswa yang sedang login berdasarkan NRP
-        $nrp = Auth::user()->mahasiswa->nrp;
-        $notifications = Notification::where('nrp', $nrp)
-            ->orderBy('created_at', 'desc')
-            ->get();
+{
+    $user = Auth::user();
 
-        return view('notifications.index', compact('notifications'));
+    if ($user->mahasiswa) {
+        $role = 'mahasiswa';
+        $nrp = $user->mahasiswa->nrp;
+    } elseif ($user->kaprodi) {
+        $role = 'kaprodi';
+        $nrp = $user->kaprodi->nrp;
+    } elseif ($user->tatausaha) {
+        $role = 'tu';
+        $nrp = $user->tatausaha->nrp;
+    } else {
+        return redirect()->back()->with('error', 'Role tidak dikenali.');
     }
 
-    public function markAsRead()
-    {
-        if (Auth::check()) {
-            Notification::where('nrp', Auth::user()->nrp)
-                ->where('is_read', false)
-                ->update(['is_read' => true]);
-        }
+    $notifications = Notification::where('role', $role)
+        ->where('nrp', $nrp)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return response()->json(['success' => true]);
+    return view('notifications.index', compact('notifications'));
+}
+
+
+
+public function markAsRead()
+{
+    $user = Auth::user();
+
+    if ($user->mahasiswa) {
+        $role = 'mahasiswa';
+        $nrp = $user->mahasiswa->nrp;
+    } elseif ($user->kaprodi) {
+        $role = 'kaprodi';
+        $nrp = $user->kaprodi->nrp;
+    } elseif ($user->tatausaha) {
+        $role = 'tu';
+        $nrp = $user->tatausaha->nrp;
+    } else {
+        return response()->json(['success' => false]);
     }
+
+    Notification::where('role', $role)
+        ->where('nrp', $nrp)
+        ->where('is_read', false)
+        ->update(['is_read' => true]);
+
+    return response()->json(['success' => true]);
+}
+
 }
